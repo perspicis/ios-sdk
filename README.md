@@ -10,13 +10,13 @@ Add Perspicis to your project in Xcode:
 
 1. File → Add Package Dependencies
 2. Enter: `https://github.com/perspicis/ios-sdk`
-3. Select version: `2.0.0` or later
+3. Select version: `2.0.2` or later
 
 Or add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/perspicis/ios-sdk", from: "2.0.0")
+    .package(url: "https://github.com/perspicis/ios-sdk", from: "2.0.2")
 ]
 ```
 
@@ -67,6 +67,7 @@ SparkInterstitialView {
 - **No IDFA required** - Works without tracking permission
 - **On-device cohorts** - User data never leaves the device
 - **GDPR/CCPA compliant** - Privacy by design
+- **iOS 17+ compliant** - Includes PrivacyInfo.xcprivacy manifest
 
 ## Support
 
@@ -74,4 +75,4 @@ SparkInterstitialView {
 
 ## License
 
-Copyright 2024 Aperture Media. All rights reserved.
+Copyright 2025 Aperture Media. All rights reserved.
