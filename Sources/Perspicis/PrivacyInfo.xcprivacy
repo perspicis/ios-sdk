@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  PrivacyInfo.xcprivacy
+  Perspicis iOS SDK
+
+  Privacy Manifest for iOS 17+ compliance.
+  This declares APIs used and data collected by the SDK.
+
+  Privacy-First Design:
+  - No cross-app tracking by default
+  - IDFA only with explicit ATT consent
+  - On-device cohort computation (data never leaves device)
+  - Minimal data collection for ad serving
+-->
+<plist version="1.0">
+<dict>
+    <!-- ================================================================
+         NSPrivacyTracking
+         ================================================================
+         Set to false because Perspicis does NOT track users across
+         apps and websites owned by other companies for advertising
+         purposes by default.
+
+         The SDK CAN request ATT permission and use IDFA, but ONLY if:
+         1. The app calls requestTrackingAuthorization()
+         2. The user explicitly grants permission
+
+         Without ATT consent, no tracking identifiers are used.
+    -->
+    <key>NSPrivacyTracking</key>
+    <false/>
+
+    <!-- ================================================================
+         NSPrivacyTrackingDomains
+         ================================================================
+         Empty array - no domains are contacted for tracking purposes
+         until/unless the user has granted ATT permission.
+    -->
+    <key>NSPrivacyTrackingDomains</key>
+    <array/>
+
+    <!-- ================================================================
+         NSPrivacyCollectedDataTypes
+         ================================================================
+         Declares what data types the SDK may collect.
+         All data is used for advertising/analytics only.
+         No data is linked to user identity without ATT consent.
+    -->
+    <key>NSPrivacyCollectedDataTypes</key>
+    <array>
+        <!-- Device ID (IDFV or generated UUID) -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeDeviceID</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+
+        <!-- Product Interaction (ad impressions, clicks, views) -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeProductInteraction</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+                <string>NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising</string>
+            </array>
+        </dict>
+
+        <!-- Advertising Data (ad views, cohort IDs - privacy-safe) -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeAdvertisingData</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeThirdPartyAdvertising</string>
+            </array>
+        </dict>
+
+        <!-- Other Diagnostic Data (SDK errors, performance metrics) -->
+        <dict>
+            <key>NSPrivacyCollectedDataType</key>
+            <string>NSPrivacyCollectedDataTypeOtherDiagnosticData</string>
+            <key>NSPrivacyCollectedDataTypeLinked</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypeTracking</key>
+            <false/>
+            <key>NSPrivacyCollectedDataTypePurposes</key>
+            <array>
+                <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
+                <string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+            </array>
+        </dict>
+    </array>
+
+    <!-- ================================================================
+         NSPrivacyAccessedAPITypes
+         ================================================================
+         Declares which privacy-impacting APIs the SDK uses and why.
+    -->
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <!-- UserDefaults API -->
+        <!-- Used for: event history storage, cohort cache, preferences -->
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <!-- CA92.1: Access info from the same app -->
+                <string>CA92.1</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>

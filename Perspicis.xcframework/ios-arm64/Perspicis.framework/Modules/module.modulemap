@@ -1,5 +1,0 @@
-framework module Perspicis {
-    umbrella header "Perspicis-Swift.h"
-    export *
-    module * { export * }
-}
